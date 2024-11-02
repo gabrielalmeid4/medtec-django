@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'medtec.wsgi.application'
+WSGI_APPLICATION = 'medtec.wsgi.app'
 
 
 # Database
