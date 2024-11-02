@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <title>Adicionar Paciente</title>
+
+</head>
+
+<body>
+    <div class="input-group">
+        <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+            <div class="card p-4" role="form" style="width: 100%; max-width: 500px;">
+                <h2 class="text-center">Adicionar Paciente</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="cpf" class="mt-2">CPF:</label>
+                    {{ form.cpf }}
+                    <label for="nome" class="mt-2">Nome:</label>
+                    {{ form.nome }}
+                    <label for="contato" class="mt-2">Contato:</label>
+                    {{ form.contato }}
+                    <label for="endereco" class="mt-2">Endereço:</label>
+                    {{ form.endereco }}
+                    <label for="dt_nasc" class="mt-2">Data de Nascimento:</label>
+                    {{ form.dt_nasc }}
+                    </form>
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,54 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
     <title>Lista de Pacientes</title>
 
 </head>
-<body>
-    <div class="container">
-        <h1>Lista de Pacientes</h1>
-        
-        <div class="search-bar">
-            <form method="GET" action="{% url 'index' %}">
-                <input
-                    type="text"
-                    name="nomeBusca"
-                    placeholder="Buscar"
-                    value="{{ request.GET.nomeBusca|default_if_none:'' }}"
-                />
-                <button type="submit">Buscar</button>
-            </form>
-        </div>
 
-        {% if erro %}
+<body>
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-5" role="form" style="width: 800px; height: 600px;">
+
+            <h2 class="text-center">Lista de Pacientes</h2>
+
+            <div class="input-group">
+                <form method="GET" action="{% url 'buscar_paciente' %}">
+                    <div class="input-group" data-mdb-input-init>
+                        <input type="search" id="form1" class="form-control" aria-label="Search"
+                            aria-describedby="search-addon" name="nome_busca" placeholder="Buscar"
+                            value="{{ request.GET.nome_busca|default_if_none:'' }}" />
+                        <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Buscar</button>
+                    </div>
+                </form>
+            </div>
+
+            {% if erro %}
             <p class="error">{{ erro }}</p>
-        {% endif %}
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for paciente in paciente_list %}
+            {% endif %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paciente in paciente_list %}
                     <tr>
                         <td>{{ paciente.cod_pac }}</td>
                         <td>{{ paciente.nome }}</td>
                         <td>{{ paciente.cpf }}</td>
                     </tr>
-                {% empty %}
+                    {% empty %}
                     <tr>
                         <td colspan="4">Nenhum paciente encontrado.</td>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     </div>
 </body>
+
 </html>
