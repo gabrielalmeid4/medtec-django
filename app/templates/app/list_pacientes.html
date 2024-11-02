@@ -1,7 +1,54 @@
-<h1>oi</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes</title>
 
-<ul>
-    {%for paciente in paciente_list%}
-    <li>{{ paciente.nome }}</li>
-    {% endfor %}
-</ul>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Pacientes</h1>
+        
+        <div class="search-bar">
+            <form method="GET" action="{% url 'index' %}">
+                <input
+                    type="text"
+                    name="nomeBusca"
+                    placeholder="Buscar"
+                    value="{{ request.GET.nomeBusca|default_if_none:'' }}"
+                />
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        {% if erro %}
+            <p class="error">{{ erro }}</p>
+        {% endif %}
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in paciente_list %}
+                    <tr>
+                        <td>{{ paciente.cod_pac }}</td>
+                        <td>{{ paciente.nome }}</td>
+                        <td>{{ paciente.cpf }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">Nenhum paciente encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
