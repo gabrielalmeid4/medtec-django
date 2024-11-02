@@ -1,8 +1,7 @@
 {
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "medtec/wsgi.py"
+         { "src": "/(.*)", "dest": "list_pacientes.html" }
     }
   ]
 }
