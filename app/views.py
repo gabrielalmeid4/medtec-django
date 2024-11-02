@@ -6,6 +6,7 @@ from django.shortcuts import render
 from .models import Paciente
 from .forms import PacienteForm
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 class ListPacientes(generic.ListView):
     model = Paciente
@@ -28,6 +29,7 @@ def buscar_paciente(request):
     
     return render(request, 'app/list_pacientes.html', { 'paciente_list': pacientes})
 
+@csrf_exempt
 def add_paciente(request):
     if request.method == 'POST':
         form = PacienteForm(request.POST)
