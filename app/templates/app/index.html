@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+        <title>Página Inicial</title>
+
+    </head>
+
+    <body>
+
+        <header>
+            <nav
+                class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <a class="navbar-brand" href="#">MedTec</a>
+                <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link"
+                                href="/app/list_pacientes">Pacientes <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <!-- <li class="nav-item active">
+                            <a class="nav-link" href="#">Médicos <span
+                                    class="sr-only">(current)</span></a>
+                        </li> -->
+                        <!-- <li class="nav-item active">
+                            <a class="nav-link" href="#">Consultas <span
+                                    class="sr-only">(current)</span></a>
+                        </li> -->
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"
+                                id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Mais
+                            </a>
+                            <div class="dropdown-menu"
+                                aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Tutorial</a>
+                                <!-- <a class="dropdown-item" href="#">Configurações</a> -->
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+            <div
+                class="d-flex flex-column justify-content-center align-items-center h-100">
+                <div>
+                    <h1 class="text-white mb-0">Bem-vindo, Administrador!</h1>
+                </div>
+                <div>
+                    <h3 class="text-white mb-0">Selecione uma das opções na
+                        barra de navegação e comece a gerenciar sua
+                        clínica.</h1>
+                </div>
+            </div>
+    </body>
+
+</html>

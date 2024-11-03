@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Pacientes</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Limitar a altura do gráfico */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px; /* Ajuste a altura conforme necessário */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center text-white">Dashboard de Pacientes</h1>
+
+        <div class="row my-4">
+            <!-- Total de Pacientes -->
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total de Pacientes</h5>
+                        <p class="card-text display-4">{{ total_pacientes }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico de Faixa Etária -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Distribuição de Pacientes por Faixa Etária</h5>
+                    </div>
+                    <div class="card-body chart-container">
+                        <canvas id="faixaEtariaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Passando dados para o JavaScript -->
+    <script type="application/json" id="faixa-etaria-data">
+        {{ faixa_etaria|safe }}
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const faixaEtaria = JSON.parse(document.getElementById('faixa-etaria-data').textContent);
+
+            const faixa_etaria_0_18 = faixaEtaria['0_18'];
+            const faixa_etaria_19_35 = faixaEtaria['19_35'];
+            const faixa_etaria_36_60 = faixaEtaria['36_60'];
+            const faixa_etaria_60_plus = faixaEtaria['60_plus'];
+
+            const faixaEtariaData = {
+                labels: ['0-18', '19-35', '36-60', '60+'],
+                datasets: [{
+                    label: 'Número de Pacientes',
+                    data: [
+                        faixa_etaria_0_18,
+                        faixa_etaria_19_35,
+                        faixa_etaria_36_60,
+                        faixa_etaria_60_plus
+                    ],
+                    backgroundColor: [
+                        '#36a2eb',
+                        '#4bc0c0',
+                        '#ffcd56',
+                        '#ff6384'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            };
+
+            // Configuração do gráfico
+            const config = {
+                type: 'doughnut',
+                data: faixaEtariaData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Mantém a proporção mesmo com o tamanho fixo
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribuição de Pacientes por Faixa Etária'
+                        }
+                    }
+                }
+            };
+
+            // Renderizando o gráfico
+            const faixaEtariaChart = new Chart(
+                document.getElementById('faixaEtariaChart'),
+                config
+            );
+        });
+    </script>
+</body>
+
+</html>

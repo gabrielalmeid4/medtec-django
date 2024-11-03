@@ -10,12 +10,17 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.template.loader import render_to_string
 from django.conf import settings
 from reportlab.pdfgen import canvas
-from io import BytesIO
+from io import BytesIO  
+from datetime import datetime
+import json
 
 
 class ListPacientes(generic.ListView):
     model = Paciente
     template_name = 'app/list_pacientes.html' 
+
+def index(request):
+    return render(request, 'app/index.html')
 
 def list_pacientes_pdf(request):
     response = HttpResponse(content_type='application/pdf')
@@ -92,3 +97,37 @@ def delete_paciente(request, id):
         return redirect('index')
     if request.method == 'GET': 
         return render(request, 'app/delete_paciente.html', {'paciente': paciente})
+
+@csrf_exempt
+def dashboard(request):
+    total_pacientes = Paciente.objects.count()
+    pacientes_0_18 = 0
+    pacientes_19_35 = 0
+    pacientes_36_60 = 0
+    pacientes_60_mais = 0
+
+    for paciente in Paciente.objects.all():
+        if (datetime.now().year - paciente.dt_nasc.year) <= 18:
+            pacientes_0_18 += 1
+        elif (datetime.now().year - paciente.dt_nasc.year) <= 35:
+            pacientes_19_35 += 1
+        elif (datetime.now().year - paciente.dt_nasc.year) <= 60:
+            pacientes_36_60 += 1
+        elif (datetime.now().year - paciente.dt_nasc.year > 60):
+            pacientes_60_mais += 1
+
+    # Pacientes por faixa etária
+    faixa_etaria = {
+        '0_18': pacientes_0_18,
+        '19_35': pacientes_19_35,
+        '36_60': pacientes_36_60,
+        '60_plus': pacientes_60_mais,
+    }
+
+    faixa_etaria_json = json.dumps(faixa_etaria)
+
+    context = {
+        'total_pacientes': total_pacientes,
+        'faixa_etaria': faixa_etaria_json,
+    }
+    return render(request, 'app/dashboard.html', context)
