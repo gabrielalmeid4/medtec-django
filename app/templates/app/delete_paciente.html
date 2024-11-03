@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <title>Remover Paciente</title>
+
+</head>
+
+<body>
+    <div class="input-group">
+        <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+            <div class="card p-4" role="form" style="width: 100%; max-width: 500px;">
+                <h2 class="text-center">Remover Paciente</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="cpf" class="mt-2">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" class="form-control" 
+                           value="{{ form.cpf.value|default:paciente.cpf }}" 
+                           placeholder="CPF existente: {{ paciente.cpf }}" readonly/>
+                    
+                    <label for="nome" class="mt-2">Nome:</label>
+                    <input type="text" id="nome" name="nome" class="form-control" 
+                           value="{{ form.nome.value|default:paciente.nome }}" 
+                           placeholder="Nome existente: {{ paciente.nome }}" readonly/>
+
+                    <label for="contato" class="mt-2">Contato:</label>
+                    <input type="text" id="contato" name="contato" class="form-control" 
+                           value="{{ form.contato.value|default:paciente.contato }}" 
+                           placeholder="Contato existente: {{ paciente.contato }}" readonly/>
+
+                    <label for="endereco" class="mt-2">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" class="form-control" 
+                           value="{{ form.endereco.value|default:paciente.endereco }}" 
+                           placeholder="Endereço existente: {{ paciente.endereco }}" readonly/>
+
+                    <label for="dt_nasc" class="mt-2">Data de Nascimento:</label>
+                    <input type="date" id="dt_nasc" name="dt_nasc" class="form-control" 
+                            value="{{ form.dt_nasc.value|default:paciente.dt_nasc|date:'Y-m-d' }}" 
+                            placeholder="Data de Nascimento existente: {{ paciente.dt_nasc|date:'d/m/Y' }}" readonly/>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Remover</button>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
