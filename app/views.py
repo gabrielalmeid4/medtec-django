@@ -71,7 +71,7 @@ def add_paciente(request):
         form = PacienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('list_pacientes')
     if request.method == 'GET':
         form = PacienteForm()
         return render(request, 'app/add_paciente.html', {'form': form})
@@ -83,7 +83,7 @@ def edit_paciente(request, id):
         form = PacienteForm(request.POST, instance=paciente)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('list_pacientes')
     if request.method == 'GET':
         form = PacienteForm(request.POST, instance=paciente)
         return render(request, 'app/edit_paciente.html', {'form': form, 'paciente': paciente})
@@ -94,7 +94,7 @@ def delete_paciente(request, id):
     
     if request.method == 'POST':
         paciente.delete()
-        return redirect('index')
+        return redirect('list_pacientes')
     if request.method == 'GET': 
         return render(request, 'app/delete_paciente.html', {'paciente': paciente})
 
