@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        /* Limitar a altura do gráfico */
         .chart-container {
             position: relative;
             width: 100%;
-            height: 400px; /* Ajuste a altura conforme necessário */
+            height: 400px; 
         }
     </style>
 </head>
@@ -24,7 +23,6 @@
         <h1 class="text-center text-white">Dashboard de Pacientes</h1>
 
         <div class="row my-4">
-            <!-- Total de Pacientes -->
             <div class="col-md-4">
                 <div class="card text-center">
                     <div class="card-body">
@@ -34,7 +32,6 @@
                 </div>
             </div>
 
-            <!-- Gráfico de Faixa Etária -->
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
@@ -48,7 +45,6 @@
         </div>
     </div>
 
-    <!-- Passando dados para o JavaScript -->
     <script type="application/json" id="faixa-etaria-data">
         {{ faixa_etaria|safe }}
     </script>
@@ -83,13 +79,12 @@
                 }]
             };
 
-            // Configuração do gráfico
             const config = {
                 type: 'doughnut',
                 data: faixaEtariaData,
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // Mantém a proporção mesmo com o tamanho fixo
+                    maintainAspectRatio: false, 
                     plugins: {
                         legend: {
                             position: 'top',
@@ -102,7 +97,6 @@
                 }
             };
 
-            // Renderizando o gráfico
             const faixaEtariaChart = new Chart(
                 document.getElementById('faixaEtariaChart'),
                 config
