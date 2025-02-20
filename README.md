@@ -28,3 +28,35 @@
 - E diversas outras bibliotecas encontradas em requirements.txt.
 
 - Acesse o projeto em https://med-tec-django-production.up.railway.app/!
+
+# 🌍 English Version:
+
+**MedTec** is a web application designed to register, organize, and manage medical appointments, as well as the data of those involved, such as patients, doctors, and hospital staff. The project is still in its early development stages. 
+
+---
+
+## 🚀 Current Features
+
+- 📋 **Patient Management**: Add, edit, delete, and list patients.
+- 🩺 **Dashboard**: View clinic statistics, such as patients by age group.
+- 📑 **Download Report**: Export the patient list as a PDF to print important details.
+
+## 💫 Upcoming Features
+
+- 🥼 **Appointment Registration**: Register medical appointments with relevant details.
+- 🔧 **Hospital Administration**: Manage staff, roles, doctors, and supervisors.
+
+## 🛠️ Technologies Used
+
+### Backend
+- **Django**
+- **PostgreSQL**
+
+### Frontend
+- **Django Templates**
+- **Bootstrap**
+
+- Plus various other libraries listed in `requirements.txt`.
+
+- Access the project at https://med-tec-django-production.up.railway.app/!
+
