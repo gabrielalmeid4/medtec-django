@@ -1,6 +1,6 @@
 # 🏥 MedTec - Sistema de Gerenciamento de Clínicas
 
-**MedTec** é uma aplicação web que visa registrar, organizar e gerenciar consultas médicas, bem como os dados dos envolvidos nessas operações, como pacientes, médicos e funcionários do hospital. O projeto ainda está no começo de seu desenvolvimento. O projeto está hospedado em https://med-tec-django-production.up.railway.app/. Teste à vontade!
+**MedTec** é uma aplicação web que visa registrar, organizar e gerenciar consultas médicas, bem como os dados dos envolvidos nessas operações, como pacientes, médicos e funcionários do hospital. O projeto ainda está no começo de seu desenvolvimento. 
 
 ---
 
